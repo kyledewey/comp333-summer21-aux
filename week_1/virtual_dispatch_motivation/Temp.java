@@ -3,27 +3,14 @@ public class Temp {
     public static String getDestinationFile(String[] args) {
         // do something
     }
-
-    public static void writeThing(boolean userWantsConsole,
-                                  String destinationFile,
-                                  int thing) {
-        if (userWantsConsole) {
-            System.out.println(thing);
-        } else {
-            File file = new File(destinationFile);
-            FileOutputStream stream = new FileOutputStream(file);
-            stream.writeln(thing);
-            stream.close();
-        }
-    }
     
-    public static int doComputation(boolean userWantsConsole,
-                                    String destinationFile) {
+    public static int doComputation(OutputDestination destination) {
         // do part #1 / 10 of computation
 
         // print result of #1 / 10
         int tempResult = ...;
-        writeThing(userWantsConsole, destinationFile, tempResult);
+        //writeThing(userWantsConsole, destinationFile, tempResult);
+        destination.writeThing(tempResult);
         
         // continue to do rest of computation
     }
@@ -31,9 +18,13 @@ public class Temp {
     public static void main(String[] args) {
         boolean userWantsConsole = doesUserWantConsole(args);
         String destinationFile = getDestinationFile(args);
+        OutputDestination destination =
+            new OutputDestination(userWantsConsole,
+                                  destinationFile);
+        
+        int result = doComputation(destination);
 
-        int result = doComputation(userWantsConsole, destinationFile);
-
-        writeThing(userWantsConsole, destinationFile, tempResult);
+        // writeThing(userWantsConsole, destinationFile, result);
+        destination.writeThing(result);
     } // main
 } // Temp
