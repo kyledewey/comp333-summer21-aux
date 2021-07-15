@@ -9,4 +9,8 @@ public class FileDestination implements OutputDestination {
     public void writeThing(final int thing) {
         stream.writeln(thing);
     }
+
+    public void close() {
+        stream.close();
+    }
 }

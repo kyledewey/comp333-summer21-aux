@@ -32,5 +32,6 @@ public class Temp {
 
         // writeThing(userWantsConsole, destinationFile, result);
         destination.writeThing(result);
+        destination.close();
     } // main
 } // Temp
