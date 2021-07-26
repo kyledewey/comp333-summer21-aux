@@ -1,61 +1,40 @@
 // use of higher-order function
-// check: ArrayElement => Boolean
-function printSome(arr, check) {
+// myFunction: ArrayElement => Boolean
+function printSome(arr, myFunction) {
     let index;
     for (index = 0; index < arr.length; index++) {
         let curElement = arr[index];
-        if (check(curElement)) {
+        if (myFunction(curElement)) {
             console.log(curElement);
         }
     }
 }
 
 function returnsTrue(x) {
+    console.log("RETURNS TRUE CALLED WITH: " + x);
     return true;
 }
 
 function printAll(arr) {
     // Example #0
     printSome(arr, returnsTrue);
-    
-    // // Example #1
-    // printSome(arr, (x) => true);
-
-    // // Example #2
-    // printSome(arr, function (x) { return true; });
-
-    // // Example #3
-    // let f = function (x) { return true; };
-    // printSome(arr, f);
 }
 
 function printAllLessThanFive(arr) {
-    let index;
-    for (index = 0; index < arr.length; index++) {
-        let curElement = arr[index];
-        if (curElement < 5) {
-            console.log(curElement);
-        }
-    }
+    printSome(arr, (curElement) => curElement < 5);
 }
 
 function printAllGreaterThan(arr, value) {
-    let index;
-    for (index = 0; index < arr.length; index++) {
-        let curElement = arr[index];
-        if (curElement > value) {
-            console.log(curElement);
-        }
-    }
+    // creates a closure - requires memory allocation
+    printSome(arr, function (curElement) {
+        return curElement > value;
+    });
 }
 
 function printAllNotEqual(arr, value) {
-    let index;
-    for (index = 0; index < arr.length; index++) {
-        let curElement = arr[index];
-        if (curElement != value) {
-            console.log(curElement);
-        }
-    }
+    let tempFunction = function (curElement) {
+        return curElement != value;
+    };
+    printSome(arr, tempFunction);
 }
 
