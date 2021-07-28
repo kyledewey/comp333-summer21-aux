@@ -1,3 +1,5 @@
+// predicate: function that returns a boolean
+
 // use of higher-order function
 // myFunction: ArrayElement => Boolean
 function printSome(arr, myFunction) {
@@ -38,3 +40,31 @@ function printAllNotEqual(arr, value) {
     printSome(arr, tempFunction);
 }
 
+function doSomething(value) {
+    if (value) {
+        console.log("value was true");
+    } else {
+        console.log("value was " + value);
+    }
+}
+
+// indirectWhile Call:
+// indirectWhile(
+//   () => x < 10,
+//   function() {
+//     console.log(x);
+//     x++;
+//   })
+//
+// equivalent while loop:
+// while (x < 10) {
+//   console.log(x);
+//   x++;
+// }
+
+function indirectWhile(funcA, funcB) {
+    if (funcA()) {
+        funcB();
+        indirectWhile(funcA, funcB);
+    }
+}
