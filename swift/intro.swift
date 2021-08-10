@@ -11,11 +11,12 @@ func callWithFive(_ f: (Int) -> Int) -> Int {
 	return f(5)
 }
 
+func indirectIf(
+	_ a: Bool,
+	ifTrue: () -> Int,
+	ifFalse: () -> Int) -> Int {
+	
+	return a ? ifTrue() : ifFalse()																	  
+}
 
-// let addOne = x => x + 1; // JavaScript
-let addOne = { x in x + 1 };
-
-let addTwo = { (a: Int, b: Int) in a + b };
-print(addOne(17))
-let temp = callWithFive(addOne)
-print(temp)
+print(indirectIf(true, ifTrue: {1 + 1}, ifFalse: {2 + 2}))
